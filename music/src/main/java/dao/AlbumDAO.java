@@ -14,13 +14,16 @@ public class AlbumDAO {
     }
 
     public Album createAlbum(Album album){
-        //TODO: Implement this CRUD function
+
+
+        this.jdbcTemplate.update("INSERT INTO albums(id, title) VALUES (?,?)", album.getId(), album.getTitle());
+
         return album;
     }
 
     public Album getAlbum(int id){
         Album album = new Album(id, "");
-        //TODO: Implement this CRUD function
+        //this.jdbcTemplate.executeQuery("SELECT * FROM albums WHERE id = (?) "), album.getId();
         //Get album and set tracks using getTracksByAlbumId(id) in TracksDAO
         return album;
     }
@@ -36,13 +39,22 @@ public class AlbumDAO {
     }
 
     public Album updateAlbum(Album album){
-        //TODO: Implement this CRUD function
+
+
+        this.jdbcTemplate.update ( "UPDATE albums SET title = ? WHERE id = ?", album.getTitle(),album.getId());
+
+
+
         return album;
     }
 
     public boolean deleteAlbum(Album album){
         boolean success = false;
-        //TODO: Implement this CRUD function
+
+        jdbcTemplate.update("delete from albums where id = ?", album);
+
+
+
         return success;
     }
 

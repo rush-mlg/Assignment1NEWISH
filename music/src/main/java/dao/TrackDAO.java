@@ -16,19 +16,30 @@ public class TrackDAO {
 
 
     public Track createTrack(Track track){
-        //TODO: Implement this CRUD function
+
+
+        this.jdbcTemplate.update("INSERT INTO tracks(title, albumid) VALUES (?,?)", track.getTitle(), track.getAlbumId());
+
+
+
         return track;
     }
 
     public Track getTrack(int id){
         Track track = new Track(id);
-        //TODO: Implement this CRUD function
+        //jdbcTemplate.query("SELECT title, album, id FROM tracks");
+
         return track;
     }
 
     public Collection<Track> getAllTracks(){
         Collection<Track> tracks = new ArrayList<Track>();
-        //TODO: Implement this CRUD function
+
+
+        jdbcTemplate.query("select * from Track", (resultSet,i) -> {
+          return toTrack(resultSet);
+        }
+
         return tracks;
     }
 
@@ -43,13 +54,18 @@ public class TrackDAO {
         return tracks;
     }
     public Track updateTrack(Track track){
-        //TODO: Implement this CRUD function
+
+        this.jdbcTemplate.update("UPDATE INTO tracks(title, albumid) VALUES (?,?)", track.getTitle(), track.getAlbumId());
+
+
+
         return track;
     }
 
     public boolean deleteTrack(Track track){
         boolean success = false;
-        //TODO: Implement this CRUD function
+
+        jdbcTemplate.update("delete from tracks where id = ?", track);
         return success;
     }
 
